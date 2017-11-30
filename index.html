@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>chowvivor</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -16,19 +16,21 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="css/map.css" rel="stylesheet">
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">gerald logo</a>
+    <a class="navbar-brand" href="index.html"> logo tbc </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="sideNavBar">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Home">
           <a class="nav-link" href="#index">
             <i class="fa fa-fw fa-home"></i>
             <span class="nav-link-text">Home</span>
@@ -131,7 +133,32 @@
   </nav>
   <div class="content-wrapper">
     <!-- put the map here and extra description -->
-
+    <div class="container-fluid">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-truck"></i> Incoming Deliveries</div>
+        <div class="card-body">
+            <div id="map"></div>
+        </div>
+        <div class="card-footer">
+          List of Deliveries reaching Today:
+          <ul id="deliver-details">
+            <li>
+              3:00 PM
+            </li>
+            <li>
+              6:00 PM
+            </li>
+            <li>
+              7:00 PM
+            </li>
+            <li>
+              8:00 PM
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
 
     <!-- /.container-fluid-->
@@ -177,16 +204,63 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMlkICn7dYpU3gkbGSGxgx1uGSuKQysTo&callback=initMap" async
+      defer></script>
     <script>
 
       var original;
-      var incoming = `<li><a href="#revert" id="revert" onClick="changeToDefault()">Back</a></li>
-        <li class="active"><a href="#revert" id="revert" onClick="showToday()" >Today</a></li>
-        <li><a href="#revert" id="revert" onClick="show2()">29/11/2017</a></li>
-        <li><a href="#revert" id="revert" onClick="show3()">30/11/2017</a></li>
-        <li><a href="#revert" id="revert" onClick="show4()">02/12/2017</a></li>
+      var incoming = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+          <a href="#revert" class="nav-link" onClick="changeToDefault()">
+            <i class="fa fa-fw fa-arrow-left"></i>
+            <span class="nav-link-text">Back</span>
+          </a>
+        </li>
+        <li class="active nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+          <a href="#revert" class="nav-link" onClick="showSchedule('today')">
+            Today
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+          <a href="#revert" class="nav-link" onClick="showSchedule('29/11/2017')">
+            9 December 2017
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+          <a href="#revert" class="nav-link" onClick="showSchedule('10/12/2017')">
+            10 December 2017
+          </a>
+        </li>
         `;
-      var previous = `<li><a href="#revert" id="revert" onClick="changeToDefault()">Back</a></li>`;
+      var previous = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+          <a href="#revert" class="nav-link" onClick="changeToDefault()">
+            <i class="fa fa-fw fa-arrow-left"></i>
+            <span class="nav-link-text">Back</span>
+          </a>
+        </li>
+        <li class="active nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+          <a href="#revert" class="nav-link" onClick="showPast('10/11/2017')">
+            10 November 2017
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+          <a href="#revert" class="nav-link" onClick="showPast('2/10/2017')">
+            2 October 2017
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+          <a href="#revert" class="nav-link" onClick="showPast('5/6/2017')">
+            5 June 2017
+          </a>
+        </li>
+        `;
+
+      function initMap() {
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: -34.397, lng: 150.644 },
+          zoom: 8
+        });
+      }
 
       function changeToDefault() {
         $('#sideNavBar').replaceWith(original);
@@ -202,10 +276,13 @@
         $('#sideNavBar').html(previous);
       }
 
-      function showToday() {
-        console.log(" today have 2 delivery.");
+      function showSchedule(specificDay) {
+        console.log(specificDay);
       }
 
+      function showPast(specificDay) {
+        console.log(specificDay);
+      }
 
     </script>
 
