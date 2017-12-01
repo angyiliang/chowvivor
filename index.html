@@ -247,7 +247,7 @@
                   firstIncoming = false;
                 }
                 incomingNav += `nav-item" data-toggle="tooltip" data-placement="right" title="` + moment(json[i].datetime).format("DD/MM/YYYY") + `">`;
-                incomingNav += `<a href="#revert" class="nav-link" onClick="showSchedule('` + moment(json[i].datetime).format("DD/MM/YYYY") + `')">`;
+                incomingNav += `<a href="#revert" class="nav-link" onClick="showSchedule('` + json[i].datetime + `')">`;
 
                 // check if today
                 if (moment(json[i].datetime).isSame(moment().format(), 'day')) {
@@ -268,7 +268,7 @@
                   firstPrevious = false;
                 }
                 previousNav += `nav-item" data-toggle="tooltip" data-placement="right" title="` + moment(json[i].datetime).format("DD/MM/YYYY") + `">`;
-                previousNav += `<a href="#revert" class="nav-link" onClick="showSchedule('` + moment(json[i].datetime).format("DD/MM/YYYY") + `')">`;
+                previousNav += `<a href="#revert" class="nav-link" onClick="showSchedule('` + json[i].datetime + `')">`;
                 previousNav += moment(json[i].datetime).format("DD/MM/YYYY");
                 previousNav += `</a></li>`;
 
@@ -460,14 +460,26 @@
 
       function showSchedule(specificDay) {
         $('#deliveryDate').html(specificDay);
+        console.log(getDeliveryDetails(specificDay));
 
       }
 
       function showPast(specificDay) {
         $('#deliveryDate').html(specificDay);
+        console.log(getDeliveryDetails(specificDay));
 
       }
 
+      function getDeliveryDetails(specificDay) {
+        var details;
+        deliveryJson.forEach(function(item){
+          if(moment(item.datetime).isSame(specificDay, 'day')){
+            details = item;
+          }
+        });
+        return details;
+        
+      }
 
     </script>
 
