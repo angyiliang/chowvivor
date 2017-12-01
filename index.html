@@ -198,6 +198,8 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
+    <!-- Moment js-->
+    <script src="vendor/moment.min.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMlkICn7dYpU3gkbGSGxgx1uGSuKQysTo&callback=initMap" async
       defer></script>
@@ -210,21 +212,6 @@
             <span class="nav-link-text">Back</span>
           </a>
         </li>
-        <li class="active nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#revert" class="nav-link" onClick="showSchedule('Today')">
-            Today
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#revert" class="nav-link" onClick="showSchedule('29/11/2017')">
-            9 December 2017
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#revert" class="nav-link" onClick="showSchedule('10/12/2017')">
-            10 December 2017
-          </a>
-        </li>
         `;
       var previousNav = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
           <a href="#revert" class="nav-link" onClick="changeToDefault()">
@@ -232,25 +219,66 @@
             <span class="nav-link-text">Back</span>
           </a>
         </li>
-        <li class="active nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#revert" class="nav-link" onClick="showPast('10/11/2017')">
-            10 November 2017
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#revert" class="nav-link" onClick="showPast('2/10/2017')">
-            2 October 2017
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#revert" class="nav-link" onClick="showPast('5/6/2017')">
-            5 June 2017
-          </a>
-        </li>
         `;
 
-      var incomingHeader = `<i class="fa fa-truck"></i> Incoming Deliveries</div>`
-      var previousHeader = `<i class="fa fa-history"></i> Previous Deliveries</div>`
+      var incomingHeader = `<i class="fa fa-truck"></i> Incoming Deliveries</div>`;
+      var previousHeader = `<i class="fa fa-history"></i> Previous Deliveries</div>`;
+      var deliveryJson = [];
+
+      $(document).ready(function () {
+        console.log("document loaded");
+
+        $.getJSON("data/deliverydata.json",
+          function (json) {
+
+            deliveryJson = json;
+
+            var firstIncoming = true;
+            var firstPrevious = true;
+
+            for (var i = 0; i < json.length; i++) {
+              console.log(moment(json[i].datetime).isBefore(moment().format(), 'day'));
+
+              // not before today
+              if (!moment(json[i].datetime).isBefore(moment().format(), 'day')) {
+
+                // add date to the navbar
+                incomingNav += `<li class="`;
+                if(firstIncoming){
+                  incomingNav += `active `;
+                  firstIncoming = false;
+                }
+                incomingNav += `nav-item" data-toggle="tooltip" data-placement="right" title="` + moment(json[i].datetime).format("DD/MM/YYYY") + `">`;
+                incomingNav += `<a href="#revert" class="nav-link" onClick="showSchedule('` + moment(json[i].datetime).format("DD/MM/YYYY") + `')">`;
+
+                // check if today
+                if (moment(json[i].datetime).isSame(moment().format(), 'day')) {
+                  incomingNav += `Today`;
+                } else {
+                  incomingNav += moment(json[i].datetime).format("DD/MM/YYYY");
+                }
+                incomingNav += `</a></li>`;
+
+
+              } else {
+                // before today
+
+                // add date to the navbar
+                previousNav += `<li class="`;
+                if(firstPrevious){
+                  previousNav += `active `;
+                  firstPrevious = false;
+                }
+                previousNav += `nav-item" data-toggle="tooltip" data-placement="right" title="` + moment(json[i].datetime).format("DD/MM/YYYY") + `">`;
+                previousNav += `<a href="#revert" class="nav-link" onClick="showSchedule('` + moment(json[i].datetime).format("DD/MM/YYYY") + `')">`;
+                previousNav += moment(json[i].datetime).format("DD/MM/YYYY");
+                previousNav += `</a></li>`;
+
+              }
+
+            }
+          });
+      });
 
       function Control(controlDiv, map, props) {
         this.tracking_ = false;
