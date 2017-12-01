@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,38 +17,38 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
   <link href="css/map.css" rel="stylesheet">
-</head>
 
+</head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"> logo tbc </a>
+      <a class="nav-logo" href="index.html"><img src="img/logo(white).png"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="sideNavBar">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Incoming">
-          <a class="nav-link" href="index.html">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Incoming" id="incNav">
+          <a class="nav-link" href="#incomingTab" onClick=changeToIncoming()>
             <i class="fa fa-fw fa-truck"></i>
             <span class="nav-link-text">Incoming Deliveries</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Previous">
-          <a class="nav-link" href="index.html">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Previous" id="preNav">
+          <a class="nav-link" href="#previousTab" onClick=changeToPrevious()>
             <i class="fa fa-fw fa-history"></i>
             <span class="nav-link-text">Previous Deliveries</span>
           </a>
         </li>
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="#profile">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
+          <a class="nav-link" href="profile.html">
             <i class="fa fa-fw fa-user-circle-o"></i>
             <span class="nav-link-text">Profile</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="#settings">
             <i class="fa fa-fw fa-cog"></i>
             <span class="nav-link-text">Settings</span>
           </a>
@@ -74,30 +75,28 @@
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">New Alerts:</h6>
             <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#availableModal">
+              <span class="text-success">
+                <strong>Incoming Delivery</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">Your package will arrive today. Will you be avaiable?</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-success">
+                <strong>Product Delivered</strong>
+              </span>
+              <span class="small float-right text-muted">09:39 AM</span>
+              <div class="dropdown-message small">An item has been delivered.</div>
+            </a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">
               <span class="text-success">
                 <strong>
                   <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
               </span>
-              <span class="small float-right text-muted">11:21 AM</span>
-              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <span class="text-danger">
-                <strong>
-                  <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
-              </span>
-              <span class="small float-right text-muted">11:21 AM</span>
-              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <span class="text-success">
-                <strong>
-                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-              </span>
-              <span class="small float-right text-muted">11:21 AM</span>
+              <span class="small float-right text-muted">08:43 AM</span>
               <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
             </a>
             <div class="dropdown-divider"></div>
@@ -124,37 +123,34 @@
     </div>
   </nav>
   <div class="content-wrapper">
-  
-  <div class="container-fluid">
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-truck"></i> Profile</div>
-        <div class="card-body rude">
-			<style>
-			img {
-			border-radius: 50%;
-			padding-bottom: 20px;
-			padding-top: 20px;
-			}
-			</style>
-			<img src="img/KimmyHighRes.jpg" width=15% height=15% alt="Profile Pic"  style="float:left;" hspace="20">
-			<font width=55px> 
-			  <span class="nav-link-text">
-			  <br>
-			  <p> Username: kimmy92  </p> 
-			  <p> First name: Yong Hwa </p>
-			  <p> Last name: Kim </p>
-			  <p> DOB: 23/05/1992 </p>
-			  <p> Address: 69 UpYours Street, Singapore 696969 </p>
-			  <p> Work address: RP@SIT </p>
-			  </span>
-			</font>
-		</div>
-      </div>
-  
-  </div>
-  </div>
-
+	<div class="card mb-3">
+			<div class="card-header">
+			  <i class="fa fa-truck"></i> Profile</div>
+			<div class="card-body rude">
+				<style>
+				.avatarPic {
+				border-radius: 50%;
+				padding-bottom: 20px;
+				padding-top: 20px;
+				}
+				</style>
+				<img src="img/KimmyHighRes.jpg" width=15% height=15% alt="Profile Pic"  style="float:left;" hspace="20" class="avatarPic">
+				<font width=55px> 
+				  <span class="nav-link-text">
+				  <br>
+				  <p> Username: kimmy92  </p> 
+				  <p> First name: Yong Hwa </p>
+				  <p> Last name: Kim </p>
+				  <p> DOB: 23/05/1992 </p>
+				  <p> Address: 69 UpYours Street, Singapore 696969 </p>
+				  <p> Work address: RP@SIT </p>
+				  </span>
+				</font>
+			</div>
+		  </div>
+	  
+	  </div>
+   </div>
 
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -187,6 +183,24 @@
         </div>
       </div>
     </div>
+	<!-- Available for delivery modal -->
+	<div class="modal fade" id="availableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Incoming Delivery</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Will you be available delivery today?</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+            <a class="btn btn-primary" href="" data-dismiss="modal">Yes</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -198,9 +212,63 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
+    <!-- Moment js-->
+    <script src="vendor/moment.min.js"></script>
+	
+    <script>
+      function changeToDefault() {
+        $('#sideNavBar').replaceWith(original);
+      }
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMlkICn7dYpU3gkbGSGxgx1uGSuKQysTo&callback=initMap" async
-      defer></script>
+      function changeToIncoming() {
+        // changing side nav content
+        $('#preNav').removeClass("active");
+        $('#incNav').addClass("active");
+        original = $('#sideNavBar').clone();
+        $('#sideNavBar').html(incomingNav);
+
+        // changing main content
+        $('#mapHeader').html(incomingHeader);
+
+      }
+
+      function changeToPrevious() {
+        // changing side nav content
+        $('#incNav').removeClass("active");
+        $('#preNav').addClass("active");
+        original = $('#sideNavBar').clone();
+        $('#sideNavBar').html(previousNav);
+
+        // changing main content
+        $('#mapHeader').html(previousHeader);
+
+      }
+
+      function showSchedule(specificDay) {
+        $('#deliveryDate').html(moment(specificDay).format("DD/MM/YYYY"));
+        console.log(getDeliveryDetails(specificDay));
+
+      }
+
+      function showPast(specificDay) {
+        $('#deliveryDate').html(moment(specificDay).format("DD/MM/YYYY"));
+        console.log(getDeliveryDetails(specificDay));
+
+      }
+
+      function getDeliveryDetails(specificDay) {
+        var details;
+        deliveryJson.forEach(function(item){
+          if(moment(item.datetime).isSame(specificDay, 'day')){
+            details = item;
+          }
+        });
+        return details;
+
+      }
+
+    </script>
+
   </div>
 </body>
 
