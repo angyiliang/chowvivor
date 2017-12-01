@@ -258,7 +258,7 @@
         // this can be implied that they want control of the map.
 
         let trackingUI = document.createElement("div");
-        trackingUI.classList.add("tracking-button", "btn");        
+        trackingUI.classList.add("tracking-button", "btn");
         trackingUI.innerHTML = "Track";
         controlDiv.appendChild(trackingUI);
 
@@ -267,24 +267,29 @@
         centerOnDestination.innerText = "Center on destination";
         controlDiv.appendChild(centerOnDestination);
 
-        trackingUI.addEventListener("click", function () {          
-          control.toggleTracking(trackingUI);
+        this._trackingUI = trackingUI;
+        trackingUI.addEventListener("click", function () {
+          control.toggleTracking();
+          control._updateTrackState();
         });
 
-        centerOnDestination.addEventListener("click", function() {
-          control.toggleTracking(trackingUI);
+        centerOnDestination.addEventListener("click", function () {
+          control.setTracking(false);
+          control._updateTrackState();
           map.panTo(props.destination);
         });
       }
 
+      Control.prototype._updateTrackState = function () {
+        if (this.getTracking()) {
+          this._trackingUI.classList.add("tracking");
+        } else {
+          this._trackingUI.classList.remove("tracking");
+        }
+      }
+
       Control.prototype.toggleTracking = function (elem) {
         this.tracking_ = !this.tracking_;
-        
-        if (this.tracking_) {          
-            elem.classList.add("tracking");
-          } else {
-            elem.classList.remove("tracking");
-          }
       }
 
       Control.prototype.getTracking = function () {
@@ -383,15 +388,15 @@
           createMarkerAt(map, startAndEnd.end, {
             title: 'End'
           });
-          
-        let centerControlDiv = document.createElement("div");
-        let centerControl = new Control(centerControlDiv, map, {
-          destination: startAndEnd.end
-        });
 
-        centerControlDiv.index = 1;
-        centerControlDiv.style['padding-top'] = '10px';
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+          let centerControlDiv = document.createElement("div");
+          let centerControl = new Control(centerControlDiv, map, {
+            destination: startAndEnd.end
+          });
+
+          centerControlDiv.index = 1;
+          centerControlDiv.style['padding-top'] = '10px';
+          map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
         }).catch(function (err) {
           console.error(err);
