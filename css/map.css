@@ -6,3 +6,26 @@
 .rude {
     padding: 0;
 }
+
+.tracking-button, .center-on-dest-button {
+    font-size: 10px;
+    background-color: #fff;
+    border: 2px solid #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    cursor: pointer;
+    float: left;
+    margin-bottom: 22px;
+    margin-right: 6px;
+    text-align: center;
+}
+
+.tracking-button:hover, .center-on-dest-button:hover {
+    background-color: rgb(235, 235, 235);
+    border: 2px solid rgb(235, 235, 235);
+}
+
+.tracking {
+    background-color: rgb(207, 207, 207);
+    border: 2px solid rgb(207, 207, 207);
+}

@@ -248,14 +248,157 @@
         </li>
         `;
 
+<<<<<<< HEAD
       var incomingHeader = `<i class="fa fa-truck"></i> Incoming Deliveries</div>`
       var previousHeader = `<i class="fa fa-history"></i> Previous Deliveries</div>`
 
+||||||| merged common ancestors
+=======
+      function Control(controlDiv, map, props) {
+        this.tracking_ = false;
+        let control = this;
+        // set tracking to false if the user drags the screen
+        // this can be implied that they want control of the map.
+
+        let trackingUI = document.createElement("div");
+        trackingUI.classList.add("tracking-button", "btn");        
+        trackingUI.innerHTML = "Track";
+        controlDiv.appendChild(trackingUI);
+
+        let centerOnDestination = document.createElement("div");
+        centerOnDestination.classList.add("center-on-dest-button", "btn");
+        centerOnDestination.innerText = "Center on destination";
+        controlDiv.appendChild(centerOnDestination);
+
+        trackingUI.addEventListener("click", function () {          
+          control.toggleTracking(trackingUI);
+        });
+
+        centerOnDestination.addEventListener("click", function() {
+          control.toggleTracking(trackingUI);
+          map.panTo(props.destination);
+        });
+      }
+
+      Control.prototype.toggleTracking = function (elem) {
+        this.tracking_ = !this.tracking_;
+        
+        if (this.tracking_) {          
+            elem.classList.add("tracking");
+          } else {
+            elem.classList.remove("tracking");
+          }
+      }
+
+      Control.prototype.getTracking = function () {
+        return this.tracking_;
+      }
+
+      Control.prototype.setTracking = function (tracking) {
+        this.tracking_ = tracking;
+      }
+
+      function parseGPX(gpx_string) {
+        let parser = new DOMParser();
+        let gpxDOM = parser.parseFromString(gpx_string, 'text/xml');
+
+        return gpxDOM;
+      }
+
+      function parseStartAndEnd(gpxDOM) {
+        let gpx = gpxDOM.getElementsByTagName("gpx")[0];
+        let points = gpx.getElementsByTagName("wpt");
+
+        return {
+          start: new google.maps.LatLng(
+            points[0].getAttribute('lat'),
+            points[0].getAttribute('lon')
+          ),
+          end: new google.maps.LatLng(
+            points[1].getAttribute('lat'),
+            points[1].getAttribute('lon')
+          )
+        };
+      }
+
+      function parseRoutes(trackDOM) {
+        let trackSegDOM = trackDOM.getElementsByTagName("trkseg")[0];
+        let trackPoints = trackSegDOM.getElementsByTagName("trkpt");
+        let points = [];
+        for (var i = 0; i < trackPoints.length; i++) {
+          let trackPoint = trackPoints[i];
+
+          let lat = trackPoint.getAttribute('lat');
+          let lng = trackPoint.getAttribute('lon');
+          let latlng = new google.maps.LatLng(lat, lng);
+          points.push(latlng);
+        }
+
+        return points;
+      }
+
+      function createMarkerAt(map, latlng, options) {
+        let opts = Object.assign({ position: latlng, map: map }, options);
+        let marker = new google.maps.Marker(opts);
+        return marker;
+      }
+
+>>>>>>> Add simulation of delivery to destination
       function initMap() {
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: { lat: -34.397, lng: 150.644 },
-          zoom: 8
+          center: { lat: 1.290270, lng: 103.851959 },
+          zoom: 16
+        });
+
+        fetch("gpx/mapstogpx20171201_065730.gpx").then(function (e) {
+          return e.text();
+        }).then(function (b) {
+          let gpxDOM = parseGPX(b);
+
+          let startAndEnd = parseStartAndEnd(gpxDOM);
+          let points = parseRoutes(gpxDOM.getElementsByTagName("trk")[0]);
+
+          var nextPoint = 2;
+          let path = new google.maps.Polyline({
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+            map: map
+          });
+          let interval = window.setInterval(function () {
+            if (nextPoint > points.length) {
+              clearInterval(interval);
+              return;
+            }
+            let latestPath = points.slice(0, nextPoint++)
+            if (centerControl.getTracking()) {
+              map.panTo(latestPath[latestPath.length - 1]);
+            }
+            path.setPath(latestPath);
+          }, 400);
+          map.panTo(startAndEnd.start);
+
+          createMarkerAt(map, startAndEnd.start, {
+            title: 'Start'
+          });
+
+          createMarkerAt(map, startAndEnd.end, {
+            title: 'End'
+          });
+          
+        let centerControlDiv = document.createElement("div");
+        let centerControl = new Control(centerControlDiv, map, {
+          destination: startAndEnd.end
+        });
+
+        centerControlDiv.index = 1;
+        centerControlDiv.style['padding-top'] = '10px';
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+
+        }).catch(function (err) {
+          console.error(err);
         });
       }
 
