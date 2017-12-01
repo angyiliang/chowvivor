@@ -1,3 +1,22 @@
+@media(min-width: 320px) {
+    .nav-logo img {
+        margin-top: 5px;
+        width: 45%;
+    }
+}
+
+@media(min-width: 960px) {
+    .nav-logo img {
+        margin-top: 5px;
+        width: 15%;
+    }
+}
+
+.nav-logo img{
+    height: 45px;
+    position: absolute; top:0;    
+}
+
 #map {
     height: 500px;
     width: 100%;
