@@ -257,7 +257,7 @@
 
                 // add date to the navbar
                 incomingNav += `<li class="`;
-                if(firstIncoming){
+                if (firstIncoming) {
                   incomingNav += `active `;
                   firstIncoming = false;
                 }
@@ -278,7 +278,7 @@
 
                 // add date to the navbar
                 previousNav += `<li class="`;
-                if(firstPrevious){
+                if (firstPrevious) {
                   previousNav += `active `;
                   firstPrevious = false;
                 }
@@ -487,8 +487,8 @@
 
       function getDeliveryDetails(specificDay) {
         var details;
-        deliveryJson.forEach(function(item){
-          if(moment(item.datetime).isSame(specificDay, 'day')){
+        deliveryJson.forEach(function (item) {
+          if (moment(item.datetime).isSame(specificDay, 'day')) {
             details = item;
           }
         });
