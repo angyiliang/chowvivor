@@ -79,8 +79,8 @@
               <span class="text-success">
                 <strong>Incoming Delivery</strong>
               </span>
-              <span class="small float-right text-muted">11:21 AM</span>
-              <div class="dropdown-message small">Your package will arrive today. Will you be avaiable?</div>
+              <span class="small float-right text-muted" id="notif1"></span>
+              <div class="dropdown-message small">Your package will arrive today in 1 hour. Will you be available?</div>
             </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">
@@ -90,6 +90,7 @@
               <span class="small float-right text-muted">09:39 AM</span>
               <div class="dropdown-message small">An item has been delivered.</div>
             </a>
+            <!--
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">
               <span class="text-success">
@@ -102,6 +103,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item small" href="#">View all alerts</a>
           </div>
+        -->
         </li>
         <li class="nav-item">
           <form class="form-inline my-2 my-lg-0 mr-lg-2">
@@ -297,6 +299,8 @@
 
             }
           });
+
+          $('#notif1').html(moment().format("LT"));
       });
 
       function Control(controlDiv, map, props) {
