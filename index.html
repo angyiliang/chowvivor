@@ -135,7 +135,7 @@
           <div id="map"></div>
         </div>
         <div class="card-footer">
-          List of Deliveries reaching Today:
+          List of Deliveries on <span id="deliveryDate">Today</span>:
           <ul id="deliver-details">
             <li>
               3:00 PM
@@ -210,7 +210,7 @@
           </a>
         </li>
         <li class="active nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#revert" class="nav-link" onClick="showSchedule('today')">
+          <a href="#revert" class="nav-link" onClick="showSchedule('Today')">
             Today
           </a>
         </li>
@@ -272,7 +272,7 @@
 
         // changing main content
         $('#mapHeader').html(incomingHeader);
-
+        
       }
 
       function changeToPrevious() {
@@ -288,11 +288,13 @@
       }
 
       function showSchedule(specificDay) {
-        console.log(specificDay);
+        $('#deliveryDate').html(specificDay);
+
       }
 
       function showPast(specificDay) {
-        console.log(specificDay);
+        $('#deliveryDate').html(specificDay);
+
       }
 
     </script>
