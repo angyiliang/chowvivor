@@ -30,13 +30,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="sideNavBar">
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Incoming">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Incoming" id="incNav">
           <a class="nav-link" href="#incomingTab" onClick=changeToIncoming()>
             <i class="fa fa-fw fa-truck"></i>
             <span class="nav-link-text">Incoming Deliveries</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Previous">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Previous" id="preNav">
           <a class="nav-link" href="#previousTab" onClick=changeToPrevious()>
             <i class="fa fa-fw fa-history"></i>
             <span class="nav-link-text">Previous Deliveries</span>
@@ -129,7 +129,7 @@
     <!-- put the map here and extra description -->
     <div class="container-fluid">
       <div class="card mb-3">
-        <div class="card-header">
+        <div class="card-header" id="mapHeader">
           <i class="fa fa-truck"></i> Incoming Deliveries</div>
         <div class="card-body rude">
           <div id="map"></div>
@@ -203,7 +203,7 @@
     <script>
 
       var original;
-      var incoming = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+      var incomingNav = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
           <a href="#revert" class="nav-link" onClick="changeToDefault()">
             <i class="fa fa-fw fa-arrow-left"></i>
             <span class="nav-link-text">Back</span>
@@ -225,7 +225,7 @@
           </a>
         </li>
         `;
-      var previous = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
+      var previousNav = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
           <a href="#revert" class="nav-link" onClick="changeToDefault()">
             <i class="fa fa-fw fa-arrow-left"></i>
             <span class="nav-link-text">Back</span>
@@ -248,6 +248,9 @@
         </li>
         `;
 
+      var incomingHeader = `<i class="fa fa-truck"></i> Incoming Deliveries</div>`
+      var previousHeader = `<i class="fa fa-history"></i> Previous Deliveries</div>`
+
       function initMap() {
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -261,13 +264,27 @@
       }
 
       function changeToIncoming() {
+        // changing side nav content
+        $('#preNav').removeClass("active");
+        $('#incNav').addClass("active");
         original = $('#sideNavBar').clone();
-        $('#sideNavBar').html(incoming);
+        $('#sideNavBar').html(incomingNav);
+
+        // changing main content
+        $('#mapHeader').html(incomingHeader);
+
       }
 
       function changeToPrevious() {
+        // changing side nav content
+        $('#incNav').removeClass("active");
+        $('#preNav').addClass("active");
         original = $('#sideNavBar').clone();
-        $('#sideNavBar').html(previous);
+        $('#sideNavBar').html(previousNav);
+
+        // changing main content
+        $('#mapHeader').html(previousHeader);
+
       }
 
       function showSchedule(specificDay) {
