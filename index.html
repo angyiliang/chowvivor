@@ -459,13 +459,13 @@
       }
 
       function showSchedule(specificDay) {
-        $('#deliveryDate').html(specificDay);
+        $('#deliveryDate').html(moment(specificDay).format("DD/MM/YYYY"));
         console.log(getDeliveryDetails(specificDay));
 
       }
 
       function showPast(specificDay) {
-        $('#deliveryDate').html(specificDay);
+        $('#deliveryDate').html(moment(specificDay).format("DD/MM/YYYY"));
         console.log(getDeliveryDetails(specificDay));
 
       }
@@ -478,7 +478,7 @@
           }
         });
         return details;
-        
+
       }
 
     </script>
