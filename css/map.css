@@ -52,3 +52,33 @@
 .dropdown-menu{
     top: 45px;
 }
+
+.avatarPic {
+    border-radius: 50%;
+}
+
+.image-container {
+margin: 20px 0 20px 0;
+}
+
+.fields-container {
+margin: 20px 0 20px 0;
+}
+
+.field {
+margin-bottom: 6px;
+}
+
+.image-container img {
+    width: 100%;
+}
+
+@media(max-width: 540px) {
+    .field-name {
+        font-size: 1.5rem;
+    }
+
+    .image-container img {
+        width: 100%;
+    }
+}
