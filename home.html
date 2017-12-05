@@ -457,6 +457,7 @@
           let routeTrackingNumber = hash.substring(10);
           document.getElementById("delivery-container").style.display = "block";
           document.getElementById("profile-container").style.display = "none";
+          resetMap();
           initMap();
           routeToIncoming(routeTrackingNumber);
 
@@ -464,6 +465,7 @@
           let routeTrackingNumber = hash.substring(10);
           document.getElementById("delivery-container").style.display = "block";
           document.getElementById("profile-container").style.display = "none";
+          resetMap();
           initMap();
           routeToPrevious(routeTrackingNumber);
 
@@ -481,9 +483,9 @@
       }
       window.onhashchange = onLocationHashChanged;
 
-      var map;
-      var interval;
-      var path;
+      var map = null;
+      var interval = null;
+      var path = null;
       var centerControl;
       var markers = [];
 
@@ -617,14 +619,17 @@
 
       function resetMap() {
         clearInterval(interval);
-        if (path !== undefined) {
-          path.setPath([]);
+        if (path !== null) {
+          path.setMap(null);
         }
         markers.forEach(function (e) {
           e.setMap(null);
         });
         markers = [];
-        map.panTo(DEFAULT_LATLNG);
+
+        if (map !== null) {
+          map.panTo(DEFAULT_LATLNG);
+        }
       }
 
       function displayOnMap(trackingNumber, simulate) {
