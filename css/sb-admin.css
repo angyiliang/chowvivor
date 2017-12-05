@@ -349,3 +349,8 @@ footer.sticky-footer {
 .borderless td, .borderless th {
   border: none;
 }
+
+.img-fluid{
+  display: block;
+  margin: 0 auto;
+}
