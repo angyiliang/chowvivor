@@ -17,12 +17,45 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
   <link href="css/map.css" rel="stylesheet">
+  <style>
+    .avatarPic {
+      border-radius: 50%;
+    }
 
+    .image-container {
+      margin: 20px 0 20px 0;
+    }
+
+    .fields-container {
+      margin: 20px 0 20px 0;
+    }
+
+    .field {
+      margin-bottom: 6px;
+    }
+
+    .image-container img {
+        width: 100%;
+      }
+
+    @media(max-width: 540px) {
+      .field-name {
+        font-size: 1.5rem;
+      }
+
+      .image-container img {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <a class="nav-logo" href="index.html"><img src="img/logo(white).png"></a>
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo(white).png">
+    </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -123,151 +156,188 @@
     </div>
   </nav>
   <div class="content-wrapper">
-	<div class="card mb-3">
-			<div class="card-header">
-			  <i class="fa fa-truck"></i> Profile</div>
-			<div class="card-body rude">
-				<style>
-				.avatarPic {
-				border-radius: 50%;
-				padding-bottom: 20px;
-				padding-top: 20px;
-				}
-				</style>
-				<img src="img/KimmyHighRes.jpg" width=15% height=15% alt="Profile Pic"  style="float:left;" hspace="20" class="avatarPic">
-				<font width=55px> 
-				  <span class="nav-link-text">
-				  <br>
-				  <p> Username: kimmy92  </p> 
-				  <p> First name: Yong Hwa </p>
-				  <p> Last name: Kim </p>
-				  <p> DOB: 23/05/1992 </p>
-				  <p> Address: 69 UpYours Street, Singapore 696969 </p>
-				  <p> Work address: RP@SIT </p>
-				  </span>
-				</font>
-			</div>
-		  </div>
-	  
-	  </div>
-   </div>
-
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
-	<!-- Available for delivery modal -->
-	<div class="modal fade" id="availableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Incoming Delivery</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Will you be available delivery today?</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
-            <a class="btn btn-primary" href="" data-dismiss="modal">Yes</a>
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fa fa-truck"></i> Profile</div>
+      <div class="card-body rude">
+        <div class="profile-container container-fluid">
+          <div class="row justify-content-start">
+            <div class="col-sm-12 col-md-2 image-container">
+              <img src="img/KimmyHighRes.jpg" class="img-fluid d-block avatarPic" />
+            </div>
+            <div class="col-sm-12 col-md-8 fields-container">
+              <div class="row field">
+                <div class="col-sm-12 col-md-3 field-name">
+                  <span>Username</span>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                  <span>
+                    kimmy92</span>
+                </div>
+              </div>
+              <div class="row field">
+                <div class="col-sm-12 col-md-3 field-name">
+                  <span>First name</span>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                  <span>Yong Hwa</span>
+                </div>
+              </div>
+              <div class="row field">
+                <div class="col-sm-12 col-md-3 field-name">
+                  <span>Last name</span>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                  <span>Kim</span>
+                </div>
+              </div>
+              <div class="row field">
+                <div class="col-sm-12 col-md-3 field-name">
+                  <span>Date of birth</span>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                  <span>23/05/1992</span>
+                </div>
+              </div>
+              <div class="row field">
+                <div class="col-sm-12 col-md-3 field-name">
+                  <span>Address</span>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                  <span>69 Upyours Street, Singapore 696969</span>
+                </div>
+              </div>
+              <div class="row field">
+                <div class="col-sm-12 col-md-3 field-name">
+                  <span>
+                    Work address</span>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                  <span>RP@SIT</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Moment js-->
-    <script src="vendor/moment.min.js"></script>
-	
-    <script>
-      function changeToDefault() {
-        $('#sideNavBar').replaceWith(original);
-      }
+  </div>
+  <!-- /.container-fluid-->
+  <!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © Your Website 2017</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Available for delivery modal -->
+  <div class="modal fade" id="availableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Incoming Delivery</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Will you be available delivery today?</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+          <a class="btn btn-primary" href="" data-dismiss="modal">Yes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin.min.js"></script>
+  <!-- Moment js-->
+  <script src="vendor/moment.min.js"></script>
 
-      function changeToIncoming() {
-        // changing side nav content
-        $('#preNav').removeClass("active");
-        $('#incNav').addClass("active");
-        original = $('#sideNavBar').clone();
-        $('#sideNavBar').html(incomingNav);
+  <script>
+    function changeToDefault() {
+      $('#sideNavBar').replaceWith(original);
+    }
 
-        // changing main content
-        $('#mapHeader').html(incomingHeader);
+    function changeToIncoming() {
+      // changing side nav content
+      $('#preNav').removeClass("active");
+      $('#incNav').addClass("active");
+      original = $('#sideNavBar').clone();
+      $('#sideNavBar').html(incomingNav);
 
-      }
+      // changing main content
+      $('#mapHeader').html(incomingHeader);
 
-      function changeToPrevious() {
-        // changing side nav content
-        $('#incNav').removeClass("active");
-        $('#preNav').addClass("active");
-        original = $('#sideNavBar').clone();
-        $('#sideNavBar').html(previousNav);
+    }
 
-        // changing main content
-        $('#mapHeader').html(previousHeader);
+    function changeToPrevious() {
+      // changing side nav content
+      $('#incNav').removeClass("active");
+      $('#preNav').addClass("active");
+      original = $('#sideNavBar').clone();
+      $('#sideNavBar').html(previousNav);
 
-      }
+      // changing main content
+      $('#mapHeader').html(previousHeader);
 
-      function showSchedule(specificDay) {
-        $('#deliveryDate').html(moment(specificDay).format("DD/MM/YYYY"));
-        console.log(getDeliveryDetails(specificDay));
+    }
 
-      }
+    function showSchedule(specificDay) {
+      $('#deliveryDate').html(moment(specificDay).format("DD/MM/YYYY"));
+      console.log(getDeliveryDetails(specificDay));
 
-      function showPast(specificDay) {
-        $('#deliveryDate').html(moment(specificDay).format("DD/MM/YYYY"));
-        console.log(getDeliveryDetails(specificDay));
+    }
 
-      }
+    function showPast(specificDay) {
+      $('#deliveryDate').html(moment(specificDay).format("DD/MM/YYYY"));
+      console.log(getDeliveryDetails(specificDay));
 
-      function getDeliveryDetails(specificDay) {
-        var details;
-        deliveryJson.forEach(function(item){
-          if(moment(item.datetime).isSame(specificDay, 'day')){
-            details = item;
-          }
-        });
-        return details;
+    }
 
-      }
+    function getDeliveryDetails(specificDay) {
+      var details;
+      deliveryJson.forEach(function (item) {
+        if (moment(item.datetime).isSame(specificDay, 'day')) {
+          details = item;
+        }
+      });
+      return details;
 
-    </script>
+    }
+
+  </script>
 
   </div>
 </body>
