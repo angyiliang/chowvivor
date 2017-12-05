@@ -7,12 +7,14 @@
         "products":[
             {
                 "name":"adidas Originals Kids' Superstar Sneaker (Big Kid/Little Kid/Toddler/Infant)",
-                "purchased_date": "11th Nov 2017",
+                "purchased_date": "10th Nov 2017",
+                "purchased_site": "Amazon",
                 "link":"https://www.amazon.com/adidas-Originals-SUPERSTAR-WHITE-Medium/dp/B00LFSF9ES/ref=sr_1_cc_1?s=aps&ie=UTF8&qid=1512112404&sr=1-1-catcorr&keywords=superstar"
             },
             {
                 "name":"Clinique Anti-Blemish Solutions All Over Clearing Treatment Oil-Free 50ml ",
                 "purchased_date": "20th Nov 2017",
+                "purchased_site": "Lazada SG",
                 "link":"http://www.lazada.sg/clinique-anti-blemish-solutions-all-over-clearing-treatment-oil-free-50ml-75501204.html?ff=1&time=1512112918&sc=IUAI"
             }
         ]
@@ -26,11 +28,13 @@
             {
                 "name":"Leopard Shark Pounce Pal Plush Stuffed Animal",
                 "purchased_date": "1st Dec 2017",
+                "purchased_site": "Amazon",
                 "link":"https://www.amazon.com/Leopard-Pounce-Pal-Stuffed-Animal/dp/B013PS0IGO/ref=sr_1_1?ie=UTF8&qid=1512455575&sr=8-1&keywords=jaws+plushie"
             },
             {
                 "name":"Funemployed: The Interview Game of Actual Jobs and Absurd Qualifications",
                 "purchased_date": "1st Dec 2017",
+                "purchased_site": "Amazon",
                 "link":"https://www.amazon.com/Funemployed-Interview-Actual-Absurd-Qualifications/dp/B01JF1VQY8/ref=sr_1_1_sspa?ie=UTF8&qid=1512455685&sr=8-1-spons&keywords=funemployed&psc=1"
             }
         ]

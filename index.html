@@ -228,7 +228,7 @@
 
         $.getJSON("data/deliverydata.json",
           function (json) {
-
+            console.log(json);
             deliveryJson = json;
 
             var firstIncoming = true;
@@ -438,11 +438,12 @@
         formattedDelivery += `<td>Status: ` + deliveryDetails.status + `</td></tr>`;
 
         // table for product details
-        var formattedProducts = `<tr><th>Product Name</th><th>Date of Purchase</th></tr>`;
+        var formattedProducts = `<tr><th>Product Name</th><th>Purchased Date</th><th>Site Purchased</th></tr>`;
         deliveryDetails.products.forEach(function (item) {
+          // console.log(item);
           formattedProducts += `<tr><td><a href="` + item.link + `" target="_blank">` + item.name + `</a></td>`;
-          formattedProducts += `<td>` + item.purchased_date + `</td></tr>`;
-
+          formattedProducts += `<td>` + item.purchased_date + `</td>`;
+          formattedProducts += `<td>` + item.purchased_site + `</td></tr>`;
         })
 
         $('#deliveryDetails').html(formattedDelivery);
@@ -521,7 +522,8 @@
         var formattedProducts = `<tr><th>Product Name</th><th>Date of Purchase</th></tr>`;
         deliveryDetails.products.forEach(function (item) {
           formattedProducts += `<tr><td><a href="` + item.link + `" target="_blank">` + item.name + `</a></td>`;
-          formattedProducts += `<td>` + item.purchased_date + `</td></tr>`;
+          formattedProducts += `<td>` + item.purchased_date + `</td>`;
+          formattedProducts += `<td>` + item.purchased_site + `</td></tr>`;
 
         })
 
