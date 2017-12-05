@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>DingDong Login</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -23,26 +23,20 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form>
+        <form id="loginForm">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="loginUsername">Username</label>
+            <input class="form-control" type="text" name="username" placeholder="Enter username">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+            <label for="loginPassword">Password</label>
+            <input class="form-control" type="password" name="password" placeholder="Password">
           </div>
-          <div class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember Password</label>
-            </div>
-          </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <a class="d-block small mt-3" href="error.html">Register an Account</a>
+          <a class="d-block small" href="error.html">Forgot Password?</a>
         </div>
       </div>
     </div>
@@ -52,6 +46,29 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <script>
+
+    $(document).ready(function () {
+      $("#loginForm").submit(function (event) {
+        loginDetails = $(this).serializeArray();
+        let username = loginDetails[0].value;
+        let passwd = loginDetails[1].value;
+
+        // check username and password
+        if (username == "kimmy92" && passwd == "password") {
+          window.location.href = "index.html";
+        } else {
+          alert("Invalid Login");
+        }
+
+        event.preventDefault();
+
+      });
+    })
+
+  </script>
+
 </body>
 
 </html>
