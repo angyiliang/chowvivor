@@ -41,26 +41,6 @@
     },
     {
         "delivery_id":3,
-        "datetime":"2017-12-12T20:07:19+08:00",
-        "status": "In transit",
-        "tracking_number": "7GSHJGFUYG7482SD",
-        "products":[
-            {
-                "name":"toothbrush",
-                "link":"https://shopee.sg/"
-            },
-            {
-                "name":"toothpaste",
-                "link":"https://www.qoo10.sg/"
-            },
-            {
-                "name":"earpiece",
-                "link":"https://shopee.sg/"
-            }
-        ]
-    },
-    {
-        "delivery_id":4,
         "datetime":"2018-01-10T08:07:19+08:00",
         "status": "In transit",
         "tracking_number": "JAW245678GHF",
@@ -86,7 +66,7 @@
         ]
     },
     {
-        "delivery_id":5,
+        "delivery_id":4,
         "datetime":"2017-11-08T17:07:19+08:00",
         "status": "Delivered",
         "tracking_number": "ADDTWXJBL102",
@@ -100,7 +80,7 @@
         ]
     },
     {
-        "delivery_id":6,
+        "delivery_id":5,
         "datetime":"2017-10-07T17:07:19+08:00",
         "status": "Delivered",
         "tracking_number": "4H34DXALBE52X",
