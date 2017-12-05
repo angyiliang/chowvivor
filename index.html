@@ -77,7 +77,7 @@
               <span class="text-success">
                 <strong>Product Delivered</strong>
               </span>
-              <span class="small float-right text-muted">09:39 AM</span>
+              <span class="small float-right text-muted" id="notif2" ></span>
               <div class="dropdown-message small">An item has been delivered.</div>
             </a>
         </li>
@@ -260,7 +260,8 @@
               }
             }
           });
-        $('#notif1').html(moment().format("LT"));
+        $('#notif1').html(moment().calendar());
+        $('#notif2').html(moment("20171108", "YYYYMMDD").fromNow());
       });
 
       function Control(controlDiv, map, props) {
@@ -505,7 +506,7 @@
         formattedDelivery += `<td>Status: ` + deliveryDetails.status + `</td></tr>`;
 
         // table for product details
-        var formattedProducts = `<tr><th>Product Name</th><th>Date Purhcased</th><th>Site Purchased</th></tr>`;
+        var formattedProducts = `<tr><th>Product Name</th><th>Date Purchased</th><th>Site Purchased</th></tr>`;
         deliveryDetails.products.forEach(function (item) {
           formattedProducts += `<tr><td><a href="` + item.link + `" target="_blank">` + item.name + `</a></td>`;
           formattedProducts += `<td>` + item.purchased_date + `</td>`;
