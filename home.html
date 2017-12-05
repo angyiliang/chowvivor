@@ -321,6 +321,49 @@
           resolve(cachedDeliveryData);
         });
       }
+
+      function buildDeliveryTable(delivery) {
+        return `
+          <tr>
+            <th colspan="2">
+              <h2>Delivery details on ${moment(delivery.datetime).format('DD/MM/YYYY')}</h2>
+            </th>
+            <tr>
+              <td>
+                Tracking Number: ${delivery.tracking_number}
+              </td>
+              <td>
+                Status: ${delivery.status}
+              </td>
+            </tr>
+          </tr>
+        `;
+      }
+      function buildProductsTable(products) {
+        let productItemHTML = products.map(function (item) {
+          return `
+            <tr>
+              <td><a href="${item.link}" target="_blank">${item.name}</td>
+              <td>${item.purchased_date}</td>
+              <td>${item.purchased_site}</td>
+            </tr>
+          `});
+        let productsTable = `
+            <tr>
+              <th>
+                Product Name
+              </th>
+              <th>
+                Date Purchased
+              </th>
+              <th>
+                Site Purchased
+              </th>
+              ${productItemHTML.join(" ")}
+            </tr>
+          `;
+        return productsTable;
+      }
       function routeToIncoming(currentTrackingNumber) {
         getFromCacheOrNetwork()
           .then(function (data) {
@@ -342,6 +385,12 @@
               <span>Incoming Deliveries</span>
             `;
 
+            let delivery = incomingDeliveries.filter(function (e) {
+              return e.tracking_number === currentTrackingNumber;
+            })[0];
+
+            document.getElementById("deliveryDetails").innerHTML = buildDeliveryTable(delivery);
+            document.getElementById("productDetails").innerHTML = buildProductsTable(delivery.products);
             displayOnMap(currentTrackingNumber, true);
           });
       }
@@ -365,6 +414,12 @@
               <i class="fa fa-history"></i>
               <span>Previous Deliveries</span>
             `;
+            let delivery = previousDeliveries.filter(function (e) {
+              return e.tracking_number === currentTrackingNumber;
+            })[0];
+
+            document.getElementById("deliveryDetails").innerHTML = buildDeliveryTable(delivery);
+            document.getElementById("productDetails").innerHTML = buildProductsTable(delivery.products);
             displayOnMap(currentTrackingNumber, false);
           });
       }
