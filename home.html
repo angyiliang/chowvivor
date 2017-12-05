@@ -60,15 +60,23 @@
                 <strong>Incoming Delivery</strong>
               </span>
               <span class="small float-right text-muted" id="notif1"></span>
-              <div class="dropdown-message small">Your package will arrive today in 1 hour. Will you be available?</div>
+              <div class="dropdown-message small">Your package 6HFKCOVB8726T will arrive today in 1 hour. Will you be available?</div>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="#Previous-ADDTWXJBLSDF">
               <span class="text-success">
-                <strong>Product Delivered</strong>
+                <strong>ADDTWXJBLSDF Delivered</strong>
               </span>
               <span class="small float-right text-muted" id="notif2"></span>
-              <div class="dropdown-message small">An item has been delivered.</div>
+              <div class="dropdown-message small">Shipment ADDTWXJBLSDF has been delivered.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#Previous-4H34DXALBE52X">
+              <span class="text-success">
+                <strong>4H34DXALBE52X Delivered</strong>
+              </span>
+              <span class="small float-right text-muted" id="notif3"></span>
+              <div class="dropdown-message small">Shipment 4H34DXALBE52X has been delivered.</div>
             </a>
         </li>
         <li class="nav-item">
@@ -195,7 +203,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="/">Logout</a>
           </div>
         </div>
       </div>
@@ -210,7 +218,7 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Will you be available for delivery today?</div>
+          <div class="modal-body">Your package will arrive in one hour, will you be available?</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
             <a class="btn btn-primary" href="" data-dismiss="modal">Yes</a>
@@ -309,6 +317,49 @@
           resolve(cachedDeliveryData);
         });
       }
+
+      function buildDeliveryTable(delivery) {
+        return `
+          <tr>
+            <th colspan="2">
+              <h2>Delivery details on ${moment(delivery.datetime).format('DD/MM/YYYY')}</h2>
+            </th>
+            <tr>
+              <td>
+                Tracking Number: ${delivery.tracking_number}
+              </td>
+              <td>
+                Status: ${delivery.status}
+              </td>
+            </tr>
+          </tr>
+        `;
+      }
+      function buildProductsTable(products) {
+        let productItemHTML = products.map(function (item) {
+          return `
+            <tr>
+              <td><a href="${item.link}" target="_blank">${item.name}</td>
+              <td>${item.purchased_date}</td>
+              <td>${item.purchased_site}</td>
+            </tr>
+          `});
+        let productsTable = `
+            <tr>
+              <th>
+                Product Name
+              </th>
+              <th>
+                Date Purchased
+              </th>
+              <th>
+                Site Purchased
+              </th>
+              ${productItemHTML.join(" ")}
+            </tr>
+          `;
+        return productsTable;
+      }
       function routeToIncoming(currentTrackingNumber) {
         getFromCacheOrNetwork()
           .then(function (data) {
@@ -330,6 +381,12 @@
               <span>Incoming Deliveries</span>
             `;
 
+            let delivery = incomingDeliveries.filter(function (e) {
+              return e.tracking_number === currentTrackingNumber;
+            })[0];
+
+            document.getElementById("deliveryDetails").innerHTML = buildDeliveryTable(delivery);
+            document.getElementById("productDetails").innerHTML = buildProductsTable(delivery.products);
             displayOnMap(currentTrackingNumber, true);
           });
       }
@@ -353,6 +410,12 @@
               <i class="fa fa-history"></i>
               <span>Previous Deliveries</span>
             `;
+            let delivery = previousDeliveries.filter(function (e) {
+              return e.tracking_number === currentTrackingNumber;
+            })[0];
+
+            document.getElementById("deliveryDetails").innerHTML = buildDeliveryTable(delivery);
+            document.getElementById("productDetails").innerHTML = buildProductsTable(delivery.products);
             displayOnMap(currentTrackingNumber, false);
           });
       }
@@ -390,6 +453,7 @@
           let routeTrackingNumber = hash.substring(10);
           document.getElementById("delivery-container").style.display = "block";
           document.getElementById("profile-container").style.display = "none";
+          resetMap();
           initMap();
           routeToIncoming(routeTrackingNumber);
 
@@ -397,6 +461,7 @@
           let routeTrackingNumber = hash.substring(10);
           document.getElementById("delivery-container").style.display = "block";
           document.getElementById("profile-container").style.display = "none";
+          resetMap();
           initMap();
           routeToPrevious(routeTrackingNumber);
 
@@ -414,9 +479,9 @@
       }
       window.onhashchange = onLocationHashChanged;
 
-      var map;
-      var interval;
-      var path;
+      var map = null;
+      var interval = null;
+      var path = null;
       var centerControl;
       var markers = [];
 
@@ -550,14 +615,17 @@
 
       function resetMap() {
         clearInterval(interval);
-        if (path !== undefined) {
-          path.setPath([]);
+        if (path !== null) {
+          path.setMap(null);
         }
         markers.forEach(function (e) {
           e.setMap(null);
         });
         markers = [];
-        map.panTo(DEFAULT_LATLNG);
+
+        if (map !== null) {
+          map.panTo(DEFAULT_LATLNG);
+        }
       }
 
       function displayOnMap(trackingNumber, simulate) {
@@ -613,6 +681,9 @@
           .catch(function (err) {
             console.error(err);
           })
+          $('#notif1').html(moment().calendar());
+        $('#notif2').html(moment("20171108", "YYYYMMDD").fromNow());
+        $('#notif3').html(moment("20171007", "YYYYMMDD").fromNow());
       }
 
     </script>
