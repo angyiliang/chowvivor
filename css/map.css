@@ -48,3 +48,7 @@
     background-color: rgb(207, 207, 207);
     border: 2px solid rgb(207, 207, 207);
 }
+
+.dropdown-menu{
+    top: 45px;
+}

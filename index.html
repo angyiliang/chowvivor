@@ -427,7 +427,6 @@
         // table for product details
         var formattedProducts = `<tr><th>Product Name</th><th>Date Purchased</th><th>Site Purchased</th></tr>`;
         deliveryDetails.products.forEach(function (item) {
-          // console.log(item);
           formattedProducts += `<tr><td><a href="` + item.link + `" target="_blank">` + item.name + `</a></td>`;
           formattedProducts += `<td>` + item.purchased_date + `</td>`;
           formattedProducts += `<td>` + item.purchased_site + `</td></tr>`;

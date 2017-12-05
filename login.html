@@ -23,6 +23,8 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
+        <div hidden class="alert alert-warning hide" id="loginAlert">
+        </div>
         <form id="loginForm">
           <div class="form-group">
             <label for="loginUsername">Username</label>
@@ -49,6 +51,7 @@
 
   <script>
 
+
     $(document).ready(function () {
       $("#loginForm").submit(function (event) {
         loginDetails = $(this).serializeArray();
@@ -59,7 +62,7 @@
         if (username == "kimmy92" && passwd == "password") {
           window.location.href = "index.html";
         } else {
-          alert("Invalid Login");
+          $("#loginAlert").html("Incorrect username or password please try again").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
         }
 
         event.preventDefault();
