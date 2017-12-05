@@ -7,629 +7,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>DingDong Home</title>
+  <title>DingDong Login</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-  <link href="css/map.css" rel="stylesheet">
-  <style>
-    #delivery-container {
-      display: block;
-    }
-
-    #profile-container {
-      display: none;
-    }
-  </style>
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="nav-logo" href="index.html">
-      <img src="img/logo(white).png">
-    </a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="sideNavBar">
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-fw fa-bell"></i>
-            <span class="d-lg-none">Alerts
-              <span class="badge badge-pill badge-warning">6 New</span>
-            </span>
-            <span class="indicator text-warning d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
-            </span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-            <h6 class="dropdown-header">New Alerts:</h6>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#availableModal">
-              <span class="text-success">
-                <strong>Incoming Delivery</strong>
-              </span>
-              <span class="small float-right text-muted" id="notif1"></span>
-              <div class="dropdown-message small">Your package will arrive today in 1 hour. Will you be available?</div>
-            </a>  
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#Previous-ADDTWXJBLSDF">
-              <span class="text-success">
-                <strong>Product Delivered</strong>
-              </span>
-              <span class="small float-right text-muted" id="notif2"></span>
-              <div class="dropdown-message small">An item has been delivered.</div>
-            </a>
-        </li>
-        <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-        </li>
-      </ul>
-      </div>
-  </nav>
-  <div class="content-wrapper">
-    <!-- put the map here and extra description -->
-    <div class="container-fluid" hidden id="bottle">
-      <div class="card mb-3" id="delivery-container">
-        <div class="card-header" id="delivery--title">
-          <i class="fa fa-truck"></i>
-          <span>Incoming Deliveries</span>
-        </div>
-        <div class="card-body rude">
-          <div id="map"></div>
-        </div>
-        <div class="card-footer">
-          <table class='table borderless' id="deliveryDetails"></table>
-          <table class='table' id="productDetails"></table>
-        </div>
-      </div>
-      <div class="card mb-3" id="profile-container">
-        <div class="card-header">
-          <i class="fa fa-truck"></i> Profile</div>
-        <div class="card-body rude">
-          <div class="profile-container container-fluid">
-            <div class="row justify-content-start">
-              <div class="col-sm-12 col-md-2 image-container">
-                <img src="img/KimmyHighRes.jpg" class="img-fluid d-block avatarPic" />
-              </div>
-              <div class="col-sm-12 col-md-8 fields-container">
-                <div class="row field">
-                  <div class="col-sm-12 col-md-3 field-name">
-                    <span>Username</span>
-                  </div>
-                  <div class="col-sm-12 col-md-9">
-                    <span>
-                      kimmy92</span>
-                  </div>
-                </div>
-                <div class="row field">
-                  <div class="col-sm-12 col-md-3 field-name">
-                    <span>Email</span>
-                  </div>
-                  <div class="col-sm-12 col-md-9 ">
-                    <span>kimmy92@gmail.com</span>
-                  </div>
-                </div>
-                <div class="row field">
-                  <div class="col-sm-12 col-md-3 field-name">
-                    <span>First name</span>
-                  </div>
-                  <div class="col-sm-12 col-md-9">
-                    <span>Yong Hwa</span>
-                  </div>
-                </div>
-                <div class="row field">
-                  <div class="col-sm-12 col-md-3 field-name">
-                    <span>Last name</span>
-                  </div>
-                  <div class="col-sm-12 col-md-9">
-                    <span>Kim</span>
-                  </div>
-                </div>
-                <div class="row field">
-                  <div class="col-sm-12 col-md-3 field-name">
-                    <span>Date of birth</span>
-                  </div>
-                  <div class="col-sm-12 col-md-9">
-                    <span>23/05/1992</span>
-                  </div>
-                </div>
-                <div class="row field">
-                  <div class="col-sm-12 col-md-3 field-name">
-                    <span>Address</span>
-                  </div>
-                  <div class="col-sm-12 col-md-9">
-                    <span>69 Upyours Street, Singapore 696969</span>
-                  </div>
-                </div>
-                <div class="row field">
-                  <div class="col-sm-12 col-md-3 field-name">
-                    <span>
-                      Work address</span>
-                  </div>
-                  <div class="col-sm-12 col-md-9">
-                    <span>RP@SIT</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<body class="bg-dark">
+    <img class="img-fluid"  src="img/logo(white).png">
+  <div class="container">
 
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Login</div>
+      <div class="card-body">
+        <div hidden class="alert alert-warning hide" id="loginAlert">
+        </div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginUsername">Username</label>
+            <input class="form-control" type="text" name="username" placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input class="form-control" type="password" name="password" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
         <div class="text-center">
-          <small>Copyright © DingDong 2017</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
+          <a class="d-block small mt-3" href="error.html">Register an Account</a>
+          <a class="d-block small" href="error.html">Forgot Password?</a>
         </div>
       </div>
     </div>
-    <!-- Available for delivery modal -->
-    <div class="modal fade" id="availableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Incoming Delivery</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Will you be available for delivery today?</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
-            <a class="btn btn-primary" href="" data-dismiss="modal">Yes</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Moment js-->
-    <script src="vendor/moment.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMlkICn7dYpU3gkbGSGxgx1uGSuKQysTo"></script>
-    <script>
-      let DEFAULT_LATLNG = { lat: 1.444745, lng: 103.783545 };
-
-      var cachedDeliveryData = null;
-      function buildIncomingNavigation(items, currentTrackingNumber) {
-        let finalHTML = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#" class="nav-link">
-            <i class="fa fa-fw fa-arrow-left"></i>
-            <span class="nav-link-text">Back</span>
-          </a>
-        </li>`;
-        let hasCurrentItem = currentTrackingNumber !== "";
-        let itemsHTML = items.map(function (item, index) {
-          let item_date = moment(item.datetime).format('DD/MM/YYYY');
-          let isActive = (!hasCurrentItem && index === 0
-            || hasCurrentItem && item.tracking_number === currentTrackingNumber)
-            ? 'active' : '';
-          return `<li class="nav-item ${isActive ? 'active' : ''}" 
-                      data-toggle="tooltip" 
-                      data-placement="right" 
-                      title="${item_date}"
-                      data-tracking-number=${item.tracking_number}>
-              <a href="#Incoming-${item.tracking_number}" class="nav-link">
-                ${item_date}
-              </a>
-            </li>`;
-        });
-        return finalHTML.concat(itemsHTML.join(" "));
-      }
-      function buildPreviousNavigation(items, currentTrackingNumber) {
-        let finalHTML = `<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Back">
-          <a href="#" class="nav-link">
-            <i class="fa fa-fw fa-arrow-left"></i>
-            <span class="nav-link-text">Back</span>
-          </a>
-        </li>`;
-        let hasCurrentItem = currentTrackingNumber !== "";
-        let itemsHTML = items.map(function (item, index) {
-          let item_date = moment(item.datetime).format('DD/MM/YYYY');
-          let isActive = (!hasCurrentItem && index === 0
-            || hasCurrentItem && item.tracking_number === currentTrackingNumber)
-            ? 'active' : '';
-          return `<li class="nav-item ${isActive ? 'active' : ''}" 
-                      data-toggle="tooltip" 
-                      data-placement="right" 
-                      title="${item_date}"
-                      data-tracking-number=${item.tracking_number}>
-              <a href="#Previous-${item.tracking_number}" class="nav-link">
-                ${item_date}
-              </a>
-            </li>`;
-        });
-        return finalHTML.concat(itemsHTML.join(" "));
-      }
-      function getDeliveryFromNetwork() {
-        return fetch("data/deliverydata.json")
-          .then(function (res) {
-            if (!res.ok) {
-              throw new Error("Failed to retrieve delivery data");
-            }
-            return res.json();
-          })
-          .catch(function (err) {
-            console.error(err);
-          });
-      }
-      function getFromCacheOrNetwork() {
-        if (cachedDeliveryData === null) {
-          return getDeliveryFromNetwork().then(function (data) {
-            cachedDeliveryData = data;
-            return data;
-          });
-        }
-        return new Promise((resolve, reject) => {
-          resolve(cachedDeliveryData);
-        });
-      }
-      function routeToIncoming(currentTrackingNumber) {
-        getFromCacheOrNetwork()
-          .then(function (data) {
-            let incomingDeliveries = data.filter(function (item) {
-              return moment(item.datetime).isAfter(moment(), 'day');
-            });
-
-            if (currentTrackingNumber === "") {
-              let firstDelivery = incomingDeliveries[0].tracking_number;
-              location.hash = `#Incoming-${firstDelivery}`;
-              currentTrackingNumber = firstDelivery;
-            }
-
-            let z = buildIncomingNavigation(incomingDeliveries, currentTrackingNumber);
-            document.getElementById("sideNavBar").innerHTML = z;
-
-            document.getElementById("delivery--title").innerHTML = `            
-              <i class="fa fa-truck"></i>
-              <span>Incoming Deliveries</span>
-            `;
-
-            displayOnMap(currentTrackingNumber, true);
-          });
-      }
-      function routeToPrevious(currentTrackingNumber) {
-        getFromCacheOrNetwork()
-          .then(function (data) {
-            let previousDeliveries = data.filter(function (item) {
-              return moment(item.datetime).isBefore(moment(), 'day');
-            });
-
-            if (currentTrackingNumber === "") {
-              let firstDelivery = previousDeliveries[0].tracking_number;
-              location.hash = `#Previous-${firstDelivery}`;
-              currentTrackingNumber = firstDelivery;
-            }
-
-            let z = buildPreviousNavigation(previousDeliveries, currentTrackingNumber);
-            document.getElementById("sideNavBar").innerHTML = z;
-
-            document.getElementById("delivery--title").innerHTML = `
-              <i class="fa fa-history"></i>
-              <span>Previous Deliveries</span>
-            `;
-            displayOnMap(currentTrackingNumber, false);
-          });
-      }
-
-      function setMainNavigation() {
-        document.getElementById("sideNavBar").innerHTML = `
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Incoming" id="incNav">
-          <a class="nav-link" href="#Incoming">
-            <i class="fa fa-fw fa-truck"></i>
-            <span class="nav-link-text">Incoming Deliveries</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Previous" id="preNav">
-          <a class="nav-link" href="#Previous">
-            <i class="fa fa-fw fa-history"></i>
-            <span class="nav-link-text">Previous Deliveries</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="#Profile">
-            <i class="fa fa-fw fa-user-circle-o"></i>
-            <span class="nav-link-text">Profile</span>
-          </a>
-        </li>
-          `;
-      }
-      function routeBasedOnCurrentHash(hash) {
-        let navigationItems = document.getElementById("sideNavBar").getElementsByClassName("nav-item");
-        [].forEach.call(navigationItems, function (e) {
-          e.classList.remove("active");
-        });
-
-        setMainNavigation();
-        if (hash.startsWith('#Incoming')) {
-          let routeTrackingNumber = hash.substring(10);
-          document.getElementById("delivery-container").style.display = "block";
-          document.getElementById("profile-container").style.display = "none";
-          initMap();
-          routeToIncoming(routeTrackingNumber);
-
-        } else if (hash.startsWith('#Previous')) {
-          let routeTrackingNumber = hash.substring(10);
-          document.getElementById("delivery-container").style.display = "block";
-          document.getElementById("profile-container").style.display = "none";
-          initMap();
-          routeToPrevious(routeTrackingNumber);
-
-        } else if (hash === '#Profile') {
-          navigationItems[2].classList.add("active");
-          document.getElementById("delivery-container").style.display = "none";
-          document.getElementById("profile-container").style.display = "block";
-        } else {
-          console.error(`Unknown route ${hash}`);
-        }
-      }
-      function onLocationHashChanged() {
-        routeBasedOnCurrentHash(location.hash);
-        document.getElementById("bottle").removeAttribute("hidden");
-      }
-      window.onhashchange = onLocationHashChanged;
-
-      var map;
-      var interval;
-      var path;
-      var centerControl;
-      var markers = [];
-
-      $(document).ready(function () {
-        routeBasedOnCurrentHash(location.hash);
-        document.getElementById("bottle").removeAttribute("hidden");
-      });
-
-      function Control(controlDiv, map, props) {
-        this.tracking_ = false;
-        this.destination_ = null;
-        let control = this;
-
-        // set tracking to false if the user drags the screen
-        // this can be implied that they want control of the map.
-
-        let trackingUI = document.createElement("div");
-        trackingUI.classList.add("tracking-button", "btn");
-        trackingUI.innerHTML = "Track";
-        controlDiv.appendChild(trackingUI);
-
-        let centerOnDestination = document.createElement("div");
-        centerOnDestination.classList.add("center-on-dest-button", "btn");
-        centerOnDestination.innerText = "Center on destination";
-        controlDiv.appendChild(centerOnDestination);
-
-        this._trackingUI = trackingUI;
-        trackingUI.addEventListener("click", function () {
-          control.toggleTracking();
-          control._updateTrackState();
-        });
-
-        centerOnDestination.addEventListener("click", function () {
-          control.setTracking(false);
-          control._updateTrackState();
-
-          let destination = control.getDestination();
-          if (destination !== null) {
-            map.panTo(destination);
-          }
-        });
-      }
-
-      Control.prototype._updateTrackState = function () {
-        if (this.getTracking()) {
-          this._trackingUI.classList.add("tracking");
-        } else {
-          this._trackingUI.classList.remove("tracking");
-        }
-      }
-
-      Control.prototype.toggleTracking = function (elem) {
-        this.tracking_ = !this.tracking_;
-      }
-
-      Control.prototype.getTracking = function () {
-        return this.tracking_;
-      }
-
-      Control.prototype.setTracking = function (tracking) {
-        this.tracking_ = tracking;
-      }
-
-      Control.prototype.setDestination = function (dest) {
-        this.destination_ = dest;
-      }
-
-      Control.prototype.getDestination = function () {
-        return this.destination_;
-      }
-
-      function parseGPX(gpx_string) {
-        let parser = new DOMParser();
-        let gpxDOM = parser.parseFromString(gpx_string, 'text/xml');
-
-        return gpxDOM;
-      }
-
-      function parseStartAndEnd(gpxDOM) {
-        let gpx = gpxDOM.getElementsByTagName("gpx")[0];
-        let points = gpx.getElementsByTagName("wpt");
-
-        return {
-          start: new google.maps.LatLng(
-            points[0].getAttribute('lat'),
-            points[0].getAttribute('lon')
-          ),
-          end: new google.maps.LatLng(
-            points[1].getAttribute('lat'),
-            points[1].getAttribute('lon')
-          )
-        };
-      }
-
-      function parseRoutes(trackDOM) {
-        let trackSegDOM = trackDOM.getElementsByTagName("trkseg")[0];
-        let trackPoints = trackSegDOM.getElementsByTagName("trkpt");
-        let points = [];
-        for (var i = 0; i < trackPoints.length; i++) {
-          let trackPoint = trackPoints[i];
-
-          let lat = trackPoint.getAttribute('lat');
-          let lng = trackPoint.getAttribute('lon');
-          let latlng = new google.maps.LatLng(lat, lng);
-          points.push(latlng);
-        }
-
-        return points;
-      }
-
-      function createMarkerAt(map, latlng, options) {
-        let opts = Object.assign({ position: latlng, map: map }, options);
-        let marker = new google.maps.Marker(opts);
-        return marker;
-      }
-
-      function initMap() {
-        // Create a map object and specify the DOM element for display.
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: DEFAULT_LATLNG,
-          zoom: 16
-        });
-
-        let centerControlDiv = document.createElement("div");
-        centerControl = new Control(centerControlDiv, map);
-
-        centerControlDiv.index = 1;
-        centerControlDiv.style['padding-top'] = '10px';
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-      }
-
-      function resetMap() {
-        clearInterval(interval);
-        if (path !== undefined) {
-          path.setPath([]);
-        }
-        markers.forEach(function (e) {
-          e.setMap(null);
-        });
-        markers = [];
-        map.panTo(DEFAULT_LATLNG);
-      }
-
-      function displayOnMap(trackingNumber, simulate) {
-        fetch(`gpx/${trackingNumber}.gpx`)
-          .then(function (res) {
-            if (!res.ok) {
-              throw new Error(`Failed to get ${trackingNumber}.gpx`);
-            }
-            return res.text();
-          })
-          .then(function (b) {
-            resetMap();
-            let gpxDOM = parseGPX(b);
-
-            let startAndEnd = parseStartAndEnd(gpxDOM);
-            let points = parseRoutes(gpxDOM.getElementsByTagName("trk")[0]);
-
-            centerControl.setDestination(startAndEnd.end);
-            path = new google.maps.Polyline({
-              geodesic: true,
-              strokeColor: '#FF0000',
-              strokeOpacity: 1.0,
-              strokeWeight: 2,
-              map: map
-            });
-            if (simulate) {
-              var nextPoint = 2;
-
-              interval = window.setInterval(function () {
-                if (nextPoint > points.length) {
-                  clearInterval(interval);
-                  return;
-                }
-                let latestPath = points.slice(0, nextPoint++)
-                if (centerControl.getTracking()) {
-                  map.panTo(latestPath[latestPath.length - 1]);
-                }
-                path.setPath(latestPath);
-              }, 400);
-            } else {
-              path.setPath(points);
-            }
-            map.panTo(startAndEnd.start);
-
-            markers.push(createMarkerAt(map, startAndEnd.start, {
-              title: 'Start'
-            }));
-
-            markers.push(createMarkerAt(map, startAndEnd.end, {
-              title: 'End'
-            }));
-          })
-          .catch(function (err) {
-            console.error(err);
-          })
-      }
-
-    </script>
-
   </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <script>
+
+
+    $(document).ready(function () {
+      $("#loginForm").submit(function (event) {
+        loginDetails = $(this).serializeArray();
+        let username = loginDetails[0].value;
+        let passwd = loginDetails[1].value;
+
+        // check username and password
+        if (username == "kimmy92" && passwd == "password") {
+          window.location.href = "home.html";
+        } else {
+          $("#loginAlert").html("Incorrect username or password please try again").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
+        }
+
+        event.preventDefault();
+
+      });
+    })
+
+  </script>
+
 </body>
 
 </html>
