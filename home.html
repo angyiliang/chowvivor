@@ -25,13 +25,17 @@
     #profile-container {
       display: none;
     }
+
+    #search-container {
+      display: none;
+    }
   </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="nav-logo" href="index.html">
+    <a class="nav-logo" href="home.html#Incoming">
       <img src="img/logo(white).png">
     </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -82,9 +86,9 @@
         <li class="nav-item">
           <form class="form-inline my-2 my-lg-0 mr-lg-2">
             <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
+              <input class="form-control" type="text" placeholder="Search for..." id="searchInput">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" onclick="search()">
                   <i class="fa fa-search"></i>
                 </button>
               </span>
@@ -101,6 +105,7 @@
   <div class="content-wrapper">
     <!-- put the map here and extra description -->
     <div class="container-fluid" hidden id="bottle">
+      <!-- delivery and map container -->
       <div class="card mb-3" id="delivery-container">
         <div class="card-header" id="delivery--title">
           <i class="fa fa-truck"></i>
@@ -114,6 +119,17 @@
           <table class='table' id="productDetails"></table>
         </div>
       </div>
+      <!-- search container -->
+      <div class="card mb-3" id="search-container">
+        <div class="card-header" id="delivery--title">
+          <i class="fa fa-search"></i>
+          <span>Search</span>
+        </div>
+        <div class="card-body rude">
+          <div id="searchBody"></div>
+        </div>
+      </div>
+      <!-- profile container -->
       <div class="card mb-3" id="profile-container">
         <div class="card-header">
           <i class="fa fa-truck"></i> Profile</div>
@@ -465,6 +481,7 @@
           let routeTrackingNumber = hash.substring(10);
           document.getElementById("delivery-container").style.display = "block";
           document.getElementById("profile-container").style.display = "none";
+          document.getElementById("search-container").style.display = "none";
           resetMap();
           initMap();
           routeToIncoming(routeTrackingNumber);
@@ -473,6 +490,7 @@
           let routeTrackingNumber = hash.substring(10);
           document.getElementById("delivery-container").style.display = "block";
           document.getElementById("profile-container").style.display = "none";
+          document.getElementById("search-container").style.display = "none";
           resetMap();
           initMap();
           routeToPrevious(routeTrackingNumber);
@@ -481,6 +499,14 @@
           navigationItems[2].classList.add("active");
           document.getElementById("delivery-container").style.display = "none";
           document.getElementById("profile-container").style.display = "block";
+          document.getElementById("search-container").style.display = "none";
+        } else if (hash.startsWith('#Search')) {
+          let searchString = hash.substring(8);
+          document.getElementById("delivery-container").style.display = "none";
+          document.getElementById("profile-container").style.display = "none";
+          document.getElementById("search-container").style.display = "block";
+          changeToSearch(searchString);
+
         } else {
           console.error(`Unknown route ${hash}`);
         }
@@ -488,6 +514,56 @@
       function onLocationHashChanged() {
         routeBasedOnCurrentHash(location.hash);
         document.getElementById("bottle").removeAttribute("hidden");
+      }
+      function search() {
+        let searchString = $('#searchInput').val();
+        // let searchString = $('#searchInput').val().split(' ').join('+');
+        location.hash = "#Search-" + encodeURIComponent(searchString);
+      }
+
+      function changeToSearch(searchString) {
+        let decodedString = decodeURIComponent(searchString);
+        let searchTable = `<table class='table'>
+          <tr><th>Search Results for "${decodedString}"</th>
+          <th>Result Details</th></tr>`;
+        $('#searchBody').html(decodedString);
+
+        getFromCacheOrNetwork()
+          .then(function (data) {
+            let searchResults = data.filter(function (item) {
+              let trackingResult = item.tracking_number.toUpperCase().includes(decodedString.toUpperCase());
+              let productResult = item.products.some(function (product) {
+                return (product.name.toUpperCase().includes(decodedString.toUpperCase())
+                  || product.purchased_site.toUpperCase().includes(decodedString.toUpperCase()));
+              });
+              return (trackingResult || productResult);
+            });
+
+            searchResults.forEach(function (item) {
+              let searchDetails = "";
+              if (item.tracking_number.toUpperCase().includes(decodedString.toUpperCase())) {
+                searchDetails += item.tracking_number + `<br>`;
+              }
+              item.products.forEach(function (product) {
+                if (product.name.toUpperCase().includes(decodedString.toUpperCase())) {
+                  searchDetails += product.name + `<br>`;
+                }
+                if (product.purchased_site.toUpperCase().includes(decodedString.toUpperCase())) {
+                  searchDetails += product.purchased_site + `<br>`;
+                }
+              });
+              if (moment(item.datetime).isAfter(moment(), 'day')) {
+                searchTable += `<tr><td><a href="#Incoming-${item.tracking_number}"> ${item.tracking_number} </a></td><td>${searchDetails}</td></tr> `;
+              } else {
+                searchTable += `<tr><td><a href="#Previous-${item.tracking_number}"> ${item.tracking_number} </a></td><td>${searchDetails}</td></tr> `;
+              }
+            });
+            if (searchResults.length == 0) {
+              searchTable += `<tr><td> No results found </td></tr> `;
+            }
+            searchTable += `</table>`;
+            $('#searchBody').html(searchTable);
+          });
       }
       window.onhashchange = onLocationHashChanged;
 
@@ -693,7 +769,7 @@
           .catch(function (err) {
             console.error(err);
           })
-          $('#notif1').html(moment().calendar());
+        $('#notif1').html(moment().calendar());
         $('#notif2').html(moment("20171108", "YYYYMMDD").fromNow());
         $('#notif3').html(moment("20171007", "YYYYMMDD").fromNow());
       }
