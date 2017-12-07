@@ -17,7 +17,7 @@
 </head>
 
 <body class="bg-dark">
-    <img class="img-fluid"  src="img/logo(white).png">
+  <img class="img-fluid" src="img/logo(white).png">
   <div class="container">
 
     <div class="card card-login mx-auto mt-5">
@@ -61,8 +61,16 @@
         // check username and password
         if (username == "kimmy92" && passwd == "password") {
           window.location.href = "home.html#Incoming";
+        } else if (username == "") {
+          $("#loginAlert").html("Empty input. Please enter your username").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
+        } else if (passwd == "") {
+          $("#loginAlert").html("Empty input. Please enter your password").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
+        } else if (username != "kimmy92") {
+          $("#loginAlert").html("Username does not exist. Please try again or create a new account").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
+        } else if (username == "kimmy92" && passwd != "password") {
+          $("#loginAlert").html("Incorrect password. Please try again").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
         } else {
-          $("#loginAlert").html("Incorrect username or password please try again").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
+          $("#loginAlert").html("Invalid input. Please try again").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
         }
 
         event.preventDefault();
