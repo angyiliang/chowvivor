@@ -84,11 +84,11 @@
             </a>
         </li>
         <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
+          <form class="form-inline my-2 my-lg-0 mr-lg-2" id="searchForm">
             <div class="input-group">
               <input class="form-control" type="text" placeholder="Search for..." id="searchInput">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" onclick="search()">
+                <button class="btn btn-primary" type="submit">
                   <i class="fa fa-search"></i>
                 </button>
               </span>
@@ -523,45 +523,81 @@
 
       function changeToSearch(searchString) {
         let decodedString = decodeURIComponent(searchString);
-        let searchTable = `<table class='table'>
-          <tr><th>Search Results for "${decodedString}"</th>
-          <th>Result Details</th></tr>`;
+        let searchTable = `<div><h3>Search Results for "${decodedString}"</h3>
+          `;
         $('#searchBody').html(decodedString);
 
         getFromCacheOrNetwork()
           .then(function (data) {
             let searchResults = data.filter(function (item) {
               let trackingResult = item.tracking_number.toUpperCase().includes(decodedString.toUpperCase());
+              let statusResult = item.status.toUpperCase().includes(decodedString.toUpperCase());
               let productResult = item.products.some(function (product) {
                 return (product.name.toUpperCase().includes(decodedString.toUpperCase())
                   || product.purchased_site.toUpperCase().includes(decodedString.toUpperCase()));
               });
-              return (trackingResult || productResult);
+              return (trackingResult || productResult || statusResult);
             });
 
+            if (searchResults.length > 0) {
+              searchTable += `<table class="table"><tr><th>Product Link</th>
+                <th>Product Name</th>
+                <th>Site Purchase</th>
+                <th>Delivery Status</th></tr>`;
+            }
+
             searchResults.forEach(function (item) {
-              let searchDetails = "";
+
               if (item.tracking_number.toUpperCase().includes(decodedString.toUpperCase())) {
-                searchDetails += item.tracking_number + `<br>`;
+                searchTable += `<tr>
+                <td><a href="`
+                if (moment(item.datetime).isAfter(moment(), 'day')) {
+                  searchTable += `#Incoming`
+                } else {
+                  searchTable += `#Previous`;
+                }
+                searchTable += `-${item.tracking_number}"> ${item.tracking_number} </a></td>`;
+                searchTable += `<td>-</td>`;
+                searchTable += `<td>-</td>`;
+                searchTable += `<td>` + item.status + `</td></tr>`;
               }
+
+
               item.products.forEach(function (product) {
                 if (product.name.toUpperCase().includes(decodedString.toUpperCase())) {
-                  searchDetails += product.name + `<br>`;
-                }
-                if (product.purchased_site.toUpperCase().includes(decodedString.toUpperCase())) {
-                  searchDetails += product.purchased_site + `<br>`;
+                  searchTable += `<tr>
+                <td><a href="`
+                  if (moment(item.datetime).isAfter(moment(), 'day')) {
+                    searchTable += `#Incoming`
+                  } else {
+                    searchTable += `#Previous`;
+                  }
+                  searchTable += `-${item.tracking_number}"> ${item.tracking_number} </a></td>`;
+                  searchTable += `<td>` + product.name + `</td>`;
+                  searchTable += `<td>` + product.purchased_site + `</td>`;
+                  searchTable += `<td>` + item.status + `</td></tr>`;
+                } else if (product.purchased_site.toUpperCase().includes(decodedString.toUpperCase())) {
+                  searchTable += `<tr>
+                <td><a href="`
+                  if (moment(item.datetime).isAfter(moment(), 'day')) {
+                    searchTable += `#Incoming`
+                  } else {
+                    searchTable += `#Previous`;
+                  }
+                  searchTable += `-${item.tracking_number}"> ${item.tracking_number} </a></td>`;
+                  searchTable += `<td>` + product.name + `</td>`;
+                  searchTable += `<td>` + product.purchased_site + `</td>`;
+                  searchTable += `<td>` + item.status + `</td></tr>`;
                 }
               });
-              if (moment(item.datetime).isAfter(moment(), 'day')) {
-                searchTable += `<tr><td><a href="#Incoming-${item.tracking_number}"> ${item.tracking_number} </a></td><td>${searchDetails}</td></tr> `;
-              } else {
-                searchTable += `<tr><td><a href="#Previous-${item.tracking_number}"> ${item.tracking_number} </a></td><td>${searchDetails}</td></tr> `;
-              }
             });
+
+
             if (searchResults.length == 0) {
-              searchTable += `<tr><td> No results found </td></tr> `;
+              searchTable += `<div class="col-sm-12"><div class="card">
+                <div class="card-block">No results found</div></div></div>`;
             }
-            searchTable += `</table>`;
+            searchTable += `</div>`;
             $('#searchBody').html(searchTable);
           });
       }
@@ -576,6 +612,11 @@
       $(document).ready(function () {
         routeBasedOnCurrentHash(location.hash);
         document.getElementById("bottle").removeAttribute("hidden");
+
+        $("#searchForm").submit(function (event) {
+          search();
+          event.preventDefault();
+        });
       });
 
       function Control(controlDiv, map, props) {
