@@ -63,8 +63,6 @@
           window.location.href = "home.html#Incoming";
         } else if (username == "") {
           $("#loginAlert").html("Empty input. Please enter your username").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
-        } else if (passwd == "") {
-          $("#loginAlert").html("Empty input. Please enter your password").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
         } else if (username != "kimmy92") {
           $("#loginAlert").html("Username does not exist. Please try again or create a new account").removeClass("hide").hide().fadeIn("slow").removeAttr("hidden");
         } else if (username == "kimmy92" && passwd != "password") {
